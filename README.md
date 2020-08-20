@@ -1,6 +1,6 @@
 # Tools.LogAggregator
 
-![Continous integration build and publish](https://github.com/swisschain/Tools.LogAggregator/workflows/validate-master/badge.svg)
+![Validate master](https://github.com/swisschain/Tools.LogAggregator/workflows/Validate%20master/badge.svg)
 
 ![API docker image: swisschains/tools-log-aggregator](https://img.shields.io/docker/v/swisschains/tools-log-aggregator?sort=semver)
 
