@@ -4,7 +4,10 @@
 
 ![API docker image: swisschains/tools-log-aggregator](https://img.shields.io/docker/v/swisschains/tools-log-aggregator?sort=semver)
 
-
+Docker image: swisschains/tools-log-aggregator
 
 # Environment Variables
-[Logging](https://github.com/swisschain/Swisschain.Sdk.Server/blob/master/README.md#logging)
+
+| variable | value |
+| -------- | ----- |
+| ElasticSearchSettings__Url | url address to ELK api (http://elasticsearch.elk-logs.svc.cluster.local:9200) |
