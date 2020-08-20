@@ -13,3 +13,15 @@
 | variable | value |
 | -------- | ----- |
 | ElasticSearchSettings__Url | url address to ELK api (http://elasticsearch.elk-logs.svc.cluster.local:9200) |
+
+# ports
+
+| port | description |
+| ---- | ----------- |
+| 5000 | HTTP Rest API. `/swagger/ui` |
+| 5001 | gRPC [proto](https://github.com/swisschain/Tools.LogAggregator/tree/master/src/LogAggregator.ApiContract) |
+
+# Kybernates
+
+* [Deployment.yaml](https://github.com/swisschain/Tools.LogAggregator/tree/master/deployment/kubernetes/Service-LogAggreggator)
+* [Service.yaml](https://github.com/swisschain/Tools.LogAggregator/tree/master/deployment/kubernetes/Service-LogAggreggator)
