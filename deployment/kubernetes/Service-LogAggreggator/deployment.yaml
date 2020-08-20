@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: log-aggregator
-        image: docker.io/swisschains/tools-log-aggregator:dev
+        image: docker.io/swisschains/tools-log-aggregator:1.0.0
         imagePullPolicy: Always
         lifecycle:
           postStart:
@@ -61,5 +61,5 @@ spec:
             memory: 1024Mi 
             cpu: 1 
         env:
-        - name: RemoteSettingsUrls__0
-          value: "http://settings.common.svc.cluster.local/tools/log-aggregator"
+        - name: ElasticSearchSettings__Url
+          value: "http://elasticsearch.elk-logs.svc.cluster.local:9200"
