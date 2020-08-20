@@ -1,0 +1,22 @@
+{
+  "Db": {
+    "ConnectionString": "${Tools-LogAggreggator-DbConnectionString}"
+  },
+
+  "SeqUrl": "http://seq.common.svc.cluster.local",
+  "Serilog": {
+    "minimumLevel": {
+      "default": "${DefaultLoggingLevel}",
+      "override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    }
+  },
+
+  "RabbitMq": {
+    "HostUrl": "rabbit.tools.svc.cluster.local",
+    "Username": "${Tools-RabbitMq-Login}",
+    "Password": "${Tools-RabbitMq-Password}"
+  }
+}

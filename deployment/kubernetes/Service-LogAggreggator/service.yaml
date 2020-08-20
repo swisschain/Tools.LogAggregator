@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: log-aggregator
+    environment: Development
+  name: log-aggregator
+  namespace: tools
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 5000
+  - name: grpc
+    port: 80
+    protocol: TCP
+    targetPort: 5001
+  selector:
+    app: log-aggregator
+  sessionAffinity: None
+  type: ClusterIP

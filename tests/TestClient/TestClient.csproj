@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Tools.LogAggreggator.TestClient</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LogAggreggator.ApiClient\LogAggreggator.ApiClient.csproj" />
+    <ProjectReference Include="..\..\src\LogAggreggator.ApiContract\LogAggreggator.ApiContract.csproj" />
+  </ItemGroup>
+
+</Project>
