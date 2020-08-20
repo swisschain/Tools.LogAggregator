@@ -4,7 +4,10 @@
 
 ![Release Service](https://github.com/swisschain/Tools.LogAggregator/workflows/Release%20Service/badge.svg)
 
-![API docker image: swisschains/tools-log-aggregator](https://img.shields.io/docker/v/swisschains/tools-log-aggregator?sort=semver)
+![API docker image: swisschains/tools-log-aggregator](https://img.shields.io/docker/v/swisschains/tools-log-aggregator?sort=semver&label=swisschains/tools-log-aggregator)
+
+
+https://img.shields.io/docker/v/qweqwe/qwe?label=qweqwe
 
 Docker image: swisschains/tools-log-aggregator
 
