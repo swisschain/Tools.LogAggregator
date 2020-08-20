@@ -7,7 +7,7 @@ package LogAggregator.Collector;
 import "google/protobuf/empty.proto";
 
 service LogCollector {
-	rpc collectSingle (LogItem) returns (Responce);
+    rpc collectSingle (LogItem) returns (Responce);
     rpc collectRange (LogItemList) returns (Responce);
     rpc collectStream (stream LogItem) returns (google.protobuf.Empty);
 }
