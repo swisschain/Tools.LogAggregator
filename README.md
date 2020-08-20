@@ -9,7 +9,7 @@
 
 https://img.shields.io/docker/v/qweqwe/qwe?label=qweqwe
 
-Docker image: swisschains/tools-log-aggregator
+**Docker image:** swisschains/tools-log-aggregator
 
 # Environment Variables
 
