@@ -3,12 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>Tools.LogAggreggator.TestClient</AssemblyName>
+    <AssemblyName>Tools.LogAggregator.TestClient</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LogAggreggator.ApiClient\LogAggreggator.ApiClient.csproj" />
-    <ProjectReference Include="..\..\src\LogAggreggator.ApiContract\LogAggreggator.ApiContract.csproj" />
+    <ProjectReference Include="..\..\src\LogAggregator.ApiClient\LogAggregator.ApiClient.csproj" />
+    <ProjectReference Include="..\..\src\LogAggregator.ApiContract\LogAggregator.ApiContract.csproj" />
   </ItemGroup>
 
 </Project>

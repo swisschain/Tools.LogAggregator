@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Swisschain.Tools.LogAggreggator.ApiClient;
-using Swisschain.Tools.LogAggreggator.ApiContract;
+using Swisschain.Tools.LogAggregator.ApiClient;
+using Swisschain.Tools.LogAggregator.ApiContract;
 
 namespace TestClient
 {
@@ -13,7 +13,7 @@ namespace TestClient
         {
             Console.WriteLine("Press enter to start");
             Console.ReadLine();
-            var client = new LogAggreggatorClient("http://localhost:5001");
+            var client = new LogAggregatorClient("http://localhost:5001");
 
             while (true)
             {

@@ -21,7 +21,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration Release
     - name: Publish API
-      run: dotnet publish --no-build ./src/LogAggreggator/LogAggreggator.csproj --output ./publish-api --configuration Release /p:AssemblyVersion=0.0.0
+      run: dotnet publish --no-build ./src/LogAggregator/LogAggregator.csproj --output ./publish-api --configuration Release /p:AssemblyVersion=0.0.0
     - name: Check api dir
       run: ls ./publish-api
     - name: Publish API to registry

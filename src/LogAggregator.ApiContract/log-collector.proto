@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "Swisschain.Tools.LogAggregator.ApiContract";
+
+package LogAggregator.Collector;
+
+import "google/protobuf/empty.proto";
+
+service LogCollector {
+	rpc collectSingle (LogItem) returns (Responce);
+    rpc collectRange (LogItemList) returns (Responce);
+    rpc collectStream (stream LogItem) returns (google.protobuf.Empty);
+}
+
+message LogItem {
+    
+    string topic = 1;      // topic to collect events
+
+    string sender = 2;     // sender of the event 
+
+    string level = 3;      // level of the log event
+    
+    string document = 4;   // json log document
+}
+
+
+message Responce {
+    bool success = 1;
+    string message = 2;
+}
+
+message LogItemList {
+  
+    repeated LogItem logs = 1;
+}
+

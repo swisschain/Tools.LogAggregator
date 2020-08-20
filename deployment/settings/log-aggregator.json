@@ -1,6 +1,6 @@
 {
   "Db": {
-    "ConnectionString": "${Tools-LogAggreggator-DbConnectionString}"
+    "ConnectionString": "${Tools-LogAggregator-DbConnectionString}"
   },
 
   "SeqUrl": "http://seq.common.svc.cluster.local",
