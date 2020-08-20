@@ -6,10 +6,7 @@
 
 ![API docker image: swisschains/tools-log-aggregator](https://img.shields.io/docker/v/swisschains/tools-log-aggregator?sort=semver&label=swisschains/tools-log-aggregator)
 
-
-https://img.shields.io/docker/v/qweqwe/qwe?label=qweqwe
-
-**Docker image:** swisschains/tools-log-aggregator
+**Docker image:** [swisschains/tools-log-aggregator](https://hub.docker.com/repository/docker/swisschains/tools-log-aggregator/tags?page=1)
 
 # Environment Variables
 
