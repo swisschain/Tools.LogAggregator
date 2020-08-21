@@ -13,6 +13,7 @@
 | variable | value |
 | -------- | ----- |
 | ElasticSearchSettings__Url | url address to ELK api (http://elasticsearch.elk-logs.svc.cluster.local:9200) |
+| Serilog__minimumLevel_default | min log level, please use `warning` |
 
 # ports
 
