@@ -2,8 +2,6 @@
 {
     public class AppConfig
     {
-        public DbConfig Db { get; set; }
-
         public ElasticSearchSettings ElasticSearchSettings { get; set; }
 
     }

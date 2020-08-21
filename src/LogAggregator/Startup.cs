@@ -24,7 +24,7 @@ namespace LogAggregator
         {
             base.ConfigureServicesExt(services);
 
-            services.AddPersistence(Config.Db.ConnectionString);
+            //services.AddPersistence(Config.Db.ConnectionString);
 
             //services.AddHostedService<IHostedService>()
 
