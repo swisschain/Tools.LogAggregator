@@ -38,7 +38,7 @@ namespace LogAggregator.Domain.Clients
 
             var res = await _lowlevelClient.BulkAsync<BulkResponse>(PostData.MultiJson(content));
 
-            if (!res.IsValid || res.Errors)
+            if (!res.IsValid)
             {
                 Console.WriteLine($"CANNOT DELIVERY: {res.DebugInformation}");
                 foreach (var item in res.ItemsWithErrors)
@@ -47,7 +47,16 @@ namespace LogAggregator.Domain.Clients
                 }
             }
 
-            return res.IsValid && !res.Errors;
+            if (res.Errors)
+            {
+                Console.WriteLine($"HAS ERRORS: {res.DebugInformation}");
+                foreach (var item in res.ItemsWithErrors)
+                {
+                    Console.WriteLine($"  -item: {item.Result}");
+                }
+            }
+
+            return res.IsValid;
         }
     }
 }
