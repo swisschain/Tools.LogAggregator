@@ -38,6 +38,15 @@ namespace LogAggregator.Domain.Clients
 
             var res = await _lowlevelClient.BulkAsync<BulkResponse>(PostData.MultiJson(content));
 
+            if (!res.IsValid || res.Errors)
+            {
+                Console.WriteLine($"CANNOT DELIVERY: {res.DebugInformation}");
+                foreach (var item in res.ItemsWithErrors)
+                {
+                    Console.WriteLine($"  -item: {item.Result}");
+                }
+            }
+
             return res.IsValid && !res.Errors;
         }
     }
