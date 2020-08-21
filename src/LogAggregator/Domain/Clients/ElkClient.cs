@@ -22,41 +22,51 @@ namespace LogAggregator.Domain.Clients
 
         public async Task<bool> WriteBulkAsync(List<(string,string)> index_data)
         {
-            var content = new List<string>();
-            foreach (var item in index_data)
+            try
             {
-                content.Add(JsonConvert.SerializeObject(new
+                var content = new List<string>();
+                foreach (var item in index_data)
                 {
-                    index = new {
-                        _index = item.Item1,
-                        _type = "_doc",
-                        _id = Guid.NewGuid().ToString("N")
+                    content.Add(JsonConvert.SerializeObject(new
+                    {
+                        index = new {
+                            _index = item.Item1,
+                            _type = "_doc",
+                            _id = Guid.NewGuid().ToString("N")
+                        }
+                    }));
+                    content.Add(item.Item2);
+                }
+
+                var res = await _lowlevelClient.BulkAsync<BulkResponse>(PostData.MultiJson(content));
+
+                if (!res.IsValid)
+                {
+                    Console.WriteLine($"CANNOT DELIVERY: {res.DebugInformation}");
+                    foreach (var item in res.ItemsWithErrors)
+                    {
+                        Console.WriteLine($"  -item: {item.Result}");
                     }
-                }));
-                content.Add(item.Item2);
-            }
-
-            var res = await _lowlevelClient.BulkAsync<BulkResponse>(PostData.MultiJson(content));
-
-            if (!res.IsValid)
-            {
-                Console.WriteLine($"CANNOT DELIVERY: {res.DebugInformation}");
-                foreach (var item in res.ItemsWithErrors)
-                {
-                    Console.WriteLine($"  -item: {item.Result}");
                 }
-            }
 
-            if (res.Errors)
-            {
-                Console.WriteLine($"HAS ERRORS: {res.DebugInformation}");
-                foreach (var item in res.ItemsWithErrors)
+                if (res.Errors)
                 {
-                    Console.WriteLine($"  -item: {item.Result}");
+                    Console.WriteLine($"HAS ERRORS: {res.DebugInformation}");
+                    foreach (var item in res.ItemsWithErrors)
+                    {
+                        Console.WriteLine($"  -item: {item.Result}");
+                    }
                 }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"CANNOT DELIVERY EXCEPTION:");
+                Console.WriteLine(e);
+                return false;
             }
 
-            return res.IsValid;
         }
     }
 }
