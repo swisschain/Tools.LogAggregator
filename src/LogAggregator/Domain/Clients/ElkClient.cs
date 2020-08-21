@@ -29,7 +29,7 @@ namespace LogAggregator.Domain.Clients
                 {
                     index = new {
                         _index = item.Item1,
-                        _type = "logs",
+                        _type = "_doc",
                         _id = Guid.NewGuid().ToString("N")
                     }
                 }));
