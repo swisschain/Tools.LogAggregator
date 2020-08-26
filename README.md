@@ -12,8 +12,11 @@
 
 | variable | value |
 | -------- | ----- |
-| ElasticSearchSettings__Url | url address to ELK api (http://elasticsearch.elk-logs.svc.cluster.local:9200) |
-| Serilog__minimumLevel_default | min log level, please use `warning` |
+| ElasticSearchSettings__Url | url address to ELK api (http://elasticsearch.elk-logs.svc.cluster.local:9200). If empty then turn off. |
+| Serilog__minimumLevel__default | min log level, please use `warning` |
+| OpsGenie__IsActive | Send errors to opsgenie |
+| OpsGenie__ApiKey | OpsGenie api key |
+
 
 # ports
 
