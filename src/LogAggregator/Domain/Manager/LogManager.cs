@@ -70,7 +70,7 @@ namespace LogAggregator.Domain.Manager
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Cannot handle log message ({message}) in handler {handler}", $"msg: {JsonConvert.SerializeObject(logs)}", handler.GetType().FullName);
+                _logger.LogError(ex, "Cannot handle log message ({message}) in handler {handler}", $"msg count: {logs.Count}", handler.GetType().FullName);
                 return false;
             }
         }

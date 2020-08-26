@@ -42,6 +42,9 @@ namespace LogAggregator
             builder.RegisterType<ElasticSearchHandler>()
                 .As<ILogHandler>();
 
+            builder.RegisterInstance(new OpsGenieHandler(Config.OpsGenie))
+                .As<ILogHandler>();
+
             builder.RegisterInstance(new ElkClient(Config.ElasticSearchSettings))
                 .AsSelf()
                 .SingleInstance();

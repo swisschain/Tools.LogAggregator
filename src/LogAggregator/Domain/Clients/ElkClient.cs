@@ -12,16 +12,30 @@ namespace LogAggregator.Domain.Clients
     {
         private readonly ElasticLowLevelClient _lowlevelClient;
 
+        private bool _isActive = false;
+
         public ElkClient(ElasticSearchSettings config)
         {
-            var settings = new ConnectionConfiguration(new Uri(config.Url))
-                .RequestTimeout(TimeSpan.FromMinutes(2));
+            if (string.IsNullOrEmpty(config?.Url))
+            {
+                _isActive = false;
+            }
+            else
+            {
+                _isActive = true;
 
-            _lowlevelClient = new ElasticLowLevelClient(settings);
+                var settings = new ConnectionConfiguration(new Uri(config.Url))
+                    .RequestTimeout(TimeSpan.FromMinutes(2));
+
+                _lowlevelClient = new ElasticLowLevelClient(settings);
+            }
         }
 
         public async Task<bool> WriteBulkAsync(List<(string,string)> index_data)
         {
+            if (!_isActive)
+                return true;
+
             try
             {
                 var content = new List<string>();
