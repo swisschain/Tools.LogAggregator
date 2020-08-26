@@ -12,6 +12,7 @@ using LogAggregator.Configuration;
 using LogAggregator.Domain.Manager;
 using Nest;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Swisschain.Tools.LogAggregator.ApiContract;
 
 namespace LogAggregator.Domain.Handlers
@@ -113,7 +114,15 @@ namespace LogAggregator.Domain.Handlers
         {
             try
             {
-                await PostRequest(log.Sender, log.Sender, log.Document);
+                var doc = JObject.Parse(log.Document);
+                var msg = doc["Msg"];
+                var message = doc["Message"];
+                var sndr = msg != null
+                    ? msg.ToString(Formatting.None)
+                    : message != null
+                        ? message.ToString()
+                        : "";
+                await PostRequest(log.Sender, $"{log.Sender}. {sndr}", doc.ToString(Formatting.Indented));
             }
             catch(Exception ex)
             {
