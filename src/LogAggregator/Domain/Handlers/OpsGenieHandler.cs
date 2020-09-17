@@ -62,7 +62,7 @@ namespace LogAggregator.Domain.Handlers
                             _senderFilter[ignore.RegExp] = item;
                         }
 
-                        if ((DateTime.UtcNow - item.Item3).TotalSeconds > ignore.Period.TotalSeconds)
+                        if (ignore.Period.TotalSeconds > 0 && (DateTime.UtcNow - item.Item3).TotalSeconds > ignore.Period.TotalSeconds)
                         {
                             item = (ignore.RegExp, 0, DateTime.UtcNow);
                             _senderFilter[ignore.RegExp] = item;
@@ -72,6 +72,8 @@ namespace LogAggregator.Domain.Handlers
                         
                         if (item.Item2 < ignore.IgnoreCount)
                         {
+                            Console.WriteLine($"Ignore message: {logItem.Sender}; {logItem.Level}; {logItem.Topic}");
+                            Console.WriteLine($"Ignore regexp: {ignore.RegExp}; CountInPeriod: {item.Item2}");
                             needIgnore = true;
                             break;
                         }
@@ -99,6 +101,8 @@ namespace LogAggregator.Domain.Handlers
 
                             if (item.Item2 < ignore.IgnoreCount)
                             {
+                                Console.WriteLine($"Ignore message: {logItem.Sender}; {logItem.Level}; {logItem.Topic}");
+                                Console.WriteLine($"Ignore regexp: {ignore.RegExp}; CountInPeriod: {item.Item2}");
                                 needIgnore = true;
                                 break;
                             }
@@ -117,6 +121,7 @@ namespace LogAggregator.Domain.Handlers
             try
             {
                 var doc = JObject.Parse(log.Document);
+                
                 var msg = doc["Msg"];
                 var message = doc["Message"];
                 var sndr = msg != null
@@ -125,9 +130,14 @@ namespace LogAggregator.Domain.Handlers
                         ? message.ToString()
                         : "";
 
-                var sender = $"{log.Sender}";
-
-                await PostRequest(sender, $"{log.Sender}. {sndr}", doc.ToString(Formatting.Indented));
+                if (sndr.ToLower() == "null")
+                    sndr = "";
+                
+                var componentJo = doc["Component"];
+                var component = componentJo != null ? componentJo.ToString(Formatting.None) : string.Empty;
+                
+                var sender = !string.IsNullOrEmpty(component) ? component : log.Sender;
+                await PostRequest(sender, $"{log.Sender}: {sndr}", doc.ToString(Formatting.Indented));
             }
             catch(Exception ex)
             {
