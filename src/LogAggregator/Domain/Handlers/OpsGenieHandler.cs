@@ -34,6 +34,8 @@ namespace LogAggregator.Domain.Handlers
             _opsgenieClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _opsgenieClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("GenieKey", settings.ApiKey);
             _opsgenieClient.BaseAddress = new Uri(settings.OpsGenieUrl);
+
+            Console.WriteLine($"DocumentIgnores: {settings.Ignore?.DocumentIgnores?.Count}; SenderIgnores: {settings.Ignore?.SenderIgnores?.Count}");
         }
 
         public Task<bool> HandleAsync(string topic, ILogItem log)
@@ -60,7 +62,7 @@ namespace LogAggregator.Domain.Handlers
                             _senderFilter[ignore.RegExp] = item;
                         }
 
-                        if ((DateTime.UtcNow - item.Item3).Seconds > ignore.Period.Seconds)
+                        if ((DateTime.UtcNow - item.Item3).TotalSeconds > ignore.Period.TotalSeconds)
                         {
                             item = (ignore.RegExp, 0, DateTime.UtcNow);
                             _senderFilter[ignore.RegExp] = item;
@@ -122,6 +124,9 @@ namespace LogAggregator.Domain.Handlers
                     : message != null
                         ? message.ToString()
                         : "";
+
+                var sender = $"{log.Sender}"
+
                 await PostRequest(log.Sender, $"{log.Sender}. {sndr}", doc.ToString(Formatting.Indented));
             }
             catch(Exception ex)
