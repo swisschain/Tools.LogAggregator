@@ -125,9 +125,9 @@ namespace LogAggregator.Domain.Handlers
                         ? message.ToString()
                         : "";
 
-                var sender = $"{log.Sender}"
+                var sender = $"{log.Sender}";
 
-                await PostRequest(log.Sender, $"{log.Sender}. {sndr}", doc.ToString(Formatting.Indented));
+                await PostRequest(sender, $"{log.Sender}. {sndr}", doc.ToString(Formatting.Indented));
             }
             catch(Exception ex)
             {

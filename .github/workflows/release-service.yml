@@ -20,7 +20,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --configuration Release
     - name: Publish API
-      run: dotnet publish ./src/LogAggregator/LogAggregator.csproj --output ./publish-api --configuration Release --configuration Release /p:AssemblyVersion=${GITHUB_REF#refs/tags/service-}
+      run: dotnet publish ./src/LogAggregator/LogAggregator.csproj --output ./publish-api --configuration Release /p:AssemblyVersion=${GITHUB_REF#refs/tags/service-}
     - name: Check API dir
       run: ls ./publish-api
     - name: Publish API to Registry
