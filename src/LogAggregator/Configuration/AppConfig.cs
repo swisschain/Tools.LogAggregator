@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Google.Protobuf.WellKnownTypes;
+using Nest;
 
 namespace LogAggregator.Configuration
 {
@@ -31,8 +33,8 @@ namespace LogAggregator.Configuration
         public class IgnoreParams
         {
             public string RegExp { get; set; }
-            public int IgnoreCount { get; set; }
-            public Timestamp Period { get; set; }
+            public int IgnoreCount { get; set; } = 0;
+            public TimeSpan Period { get; set; } = TimeSpan.FromSeconds(0);
         }
     }
 
