@@ -99,7 +99,7 @@ namespace LogAggregator.Domain.Handlers
 
                             item.Item2++;
 
-                            if (item.Item2 < ignore.IgnoreCount)
+                            if (ignore.IgnoreCount == 0 || item.Item2 < ignore.IgnoreCount)
                             {
                                 Console.WriteLine($"Ignore message: {logItem.Sender}; {logItem.Level}; {logItem.Topic}");
                                 Console.WriteLine($"Ignore regexp: {ignore.RegExp}; CountInPeriod: {item.Item2}");
@@ -124,11 +124,15 @@ namespace LogAggregator.Domain.Handlers
                 
                 var msg = doc["Msg"];
                 var message = doc["Message"];
+                var stack = doc["Stack"];
+                
                 var sndr = msg != null
                     ? msg.ToString(Formatting.None)
                     : message != null
                         ? message.ToString()
-                        : "";
+                        : stack != null
+                            ? stack.ToString().Substring(0,20)
+                            : "";
 
                 if (sndr.ToLower() == "null")
                     sndr = "";
@@ -136,7 +140,8 @@ namespace LogAggregator.Domain.Handlers
                 var componentJo = doc["Component"];
                 var component = componentJo != null ? componentJo.ToString(Formatting.None) : string.Empty;
                 
-                var sender = !string.IsNullOrEmpty(component) ? component : log.Sender;
+                var sender = log.Sender +
+                             (!string.IsNullOrEmpty(component) ? $" - {component}" : "");
                 await PostRequest(sender, $"{log.Sender}: {sndr}", doc.ToString(Formatting.Indented));
             }
             catch(Exception ex)

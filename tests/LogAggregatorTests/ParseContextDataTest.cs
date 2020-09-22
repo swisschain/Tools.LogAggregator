@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -59,6 +60,17 @@ namespace LogAggregatorTests
 
         }
 
-        
+        [Fact]
+        public void TestRegExp()
+        {
+            var doc = "Hello nonce to small world";
+
+            var res = Regex.IsMatch(doc, "nonce to small");
+
+            _testOutputHelper.WriteLine(res.ToString());
+        }
+
+
+
     }
 }
